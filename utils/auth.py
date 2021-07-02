@@ -26,6 +26,7 @@ class Auth:
 	def ask_for_auth_code(self):
 		webbrowser.open(self.__full_auth_url)
 
+	#Guarda o actualiza el access token dentro del archivo .env
 	def append_access_token(self, token):
 		file = open(self.__env_path, 'a+')
 		

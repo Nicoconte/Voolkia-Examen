@@ -26,6 +26,7 @@ class SellerItems:
 
 		return name
 
+	#Genera el archivo los con los items
 	def __write_item_log(self, name, items):
 		file = None
 
@@ -53,14 +54,10 @@ class SellerItems:
 
 	def get_published_items(self):		
 		for seller in self.__seller_id:
-			print(seller)
 			try:
 				endpoint = f"{self.__base_url}/sites/{self.__site_id}/search?seller_id={seller}"	
-				print("a ", endpoint)
 				response = self.__http.get(endpoint, headers=self.__header)
-				print("b ", response.json())
 				items = response.json().get('results')
-				print("c ", items)
 				self.__write_item_log(f"items_from_{seller}", items)
 			
 			except:
@@ -76,7 +73,6 @@ def main(argv):
 		seller_id = input('Seller id: ').strip().split(",")
 		site_id = input('Site id: ').strip()
 
-		print(seller_id)
 		seller_items = SellerItems(seller_id, site_id)
 		seller_items.get_published_items()		
 
